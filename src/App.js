@@ -11,6 +11,7 @@ firebase.initializeApp( firebaseConfig );
 
 
 function App() {
+  //we need a firebase provider
   const provider = new firebase.auth.GoogleAuthProvider();
   const handleClick = () =>{
     firebase.auth().signInWithPopup(provider)
@@ -20,6 +21,7 @@ function App() {
 
     })
   }
+  
   return (
     <div className="App">
       <button onClick={handleClick}>sign in</button>
