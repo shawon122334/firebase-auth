@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import React,{useState} from 'react';
 //core firebase sdk import
 import firebase from "firebase/app";
 //we just need authentication
@@ -11,6 +11,13 @@ firebase.initializeApp( firebaseConfig );
 
 
 function App() {
+  //state for user
+  const [user,setUser] = useState({
+    isLoggedIn: false,
+    name:'',
+    email:'',
+    photo:''
+  })
   //we need a firebase provider
   const provider = new firebase.auth.GoogleAuthProvider();
   const handleClick = () =>{

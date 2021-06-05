@@ -1,5 +1,9 @@
-server less.third party created db we use them.we can use firebase for hosting too 
+Firebase installation and how do we use it to a project
+------------------------------------------------------------------
+firebase is server less.third party created db we use them.we can use firebase for hosting too 
 ----------------------------------------
+part 1 : create firebase project
+--------------------------------------
 how do we create firebase project? 
 
 1. go to firebase project 
@@ -20,6 +24,8 @@ now we go to authentication as we only work for it
 
 -we now set up sign in method and template 
 -------------------------------------------
+part 2 : firebase install and import 
+------------------------------------
 go to docs -> select web
 we use codes for installation from cdn if we use plain js 
 
@@ -65,8 +71,23 @@ copy the code from firebase console-> project setting -> sdk setup configuration
 
 basic setup done
 -------------------------------------------
-
+part 3 : sign in with google, open google log in pop up 
+---------------------------------------------
 docs step 4 skipped as we will not deploy 
 docs step 5 -> authentication
 now we go to google sign in (as we are using only this)
-we need to set a provider 
+we need to set a provider , then, 
+we create a button so if user click log in button google sign in appears 
+
+button on click: 
+  const handleClick = () =>{
+    firebase.auth().signInWithPopup(provider)
+    .then(result=>{
+      const {displayName,email,photoURL} = result.user;
+      console.log(displayName,email,photoURL);
+
+    })
+  }
+-------------------------------------------------------
+part 4 :  set logged in user in state, display logged in user info 
+--------------------------------------------------------
