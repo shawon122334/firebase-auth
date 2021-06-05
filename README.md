@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+server less.third party created db we use them.we can use firebase for hosting too 
+----------------------------------------
+how do we create firebase project? 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. go to firebase project 
+2.get started
+3.create project (space not allowed for project name) 
+4.select google analytics if you need 
+5.we select web icon as we are developing website 
+//AB testing : change some design to check users are attracted and use these more
+6.add nickname for app we just created
+//we do not add those codes for firebase , we rather go to firebase documentation 
+7.click continue to console 
+8. now we are into the particular project 
+9.click develop -> authentication ( we will work here )
+-----------------------------------------
+if we do not have a gmail logged in to our browser we have to create account for firebase website
+------------------------------------------
+now we go to authentication as we only work for it 
 
-## Available Scripts
+-we now set up sign in method and template 
+-------------------------------------------
+go to docs -> select web
+we use codes for installation from cdn if we use plain js 
 
-In the project directory, you can run:
 
-### `npm start`
+we see some commands
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Install the Firebase JavaScript SDK:
 
-### `npm test`
+If you don't already have a package.json file, create one by running the following command from the root of your JavaScript project:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. npm init
 
-### `npm run build`
+Install the firebase npm package and save it to your package.json file by running:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. npm install --save firebase 
+(firebase dependency will be added to package.json)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+To include only specific Firebase products (like Authentication and Cloud Firestore), import Firebase modules:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+//we should not use these imported codes to app.js but just to learn we import them ot app.js 
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+3. import firebase from "firebase/app";
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+// If you enabled Analytics in your project, add the Firebase SDK for Analytics
+4. import "firebase/analytics";
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+// Add the Firebase products that you want to use
+5. import "firebase/auth";
 
-## Learn More
+//we are not using the command below 
+import "firebase/firestore";
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Initialize Firebase in your app:
+6. create a file in src named firebase.config.js
+copy the code from firebase console-> project setting -> sdk setup configuration -> config -> copy code and paste (export code ) 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+7. initialize firebase : firebase.initializeApp(firebaseConfig);
+(auto import the codes we have inside firebaseConfig)
 
-### Code Splitting
+basic setup done
+-------------------------------------------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+docs step 4 skipped as we will not deploy 
+docs step 5 -> authentication
+now we go to google sign in (as we are using only this)
+we need to set a provider 
