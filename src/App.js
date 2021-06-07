@@ -11,9 +11,9 @@ firebase.initializeApp( firebaseConfig );
 
 
 function App() {
-  //state for user
+  //state for user info
   const [user,setUser] = useState({
-    isLoggedIn: false,
+    isSignedIn: false,
     name:'',
     email:'',
     photo:''
@@ -24,14 +24,31 @@ function App() {
     firebase.auth().signInWithPopup(provider)
     .then(result=>{
       const {displayName,email,photoURL} = result.user;
-      console.log(displayName,email,photoURL);
+      // console.log(displayName,email,photoURL);
+      //we created an object below for the state to show user information
+      const signedInUser = {
+        isSignedIn : true,
+        name  : displayName,
+        email : email,
+        photo : photoURL
+      }
+      setUser(signedInUser)
+      console.log(user.name)  
 
+    })
+    .catch(err=>{
+      console.log(err)
+      console.log(err.message)
     })
   }
   
   return (
     <div className="App">
       <button onClick={handleClick}>sign in</button>
+      {
+        user.isSignedIn&& <p>welcome, {user.name}</p>
+        
+      }
     </div>
   );
 }

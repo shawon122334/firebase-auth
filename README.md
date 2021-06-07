@@ -7,16 +7,16 @@ part 1 : create firebase project
 how do we create firebase project? 
 
 1. go to firebase project 
-2.get started
-3.create project (space not allowed for project name) 
-4.select google analytics if you need 
-5.we select web icon as we are developing website 
+2. get started
+3. create project (space not allowed for project name) 
+4. select google analytics if you need 
+5. we select web icon as we are developing website 
 //AB testing : change some design to check users are attracted and use these more
-6.add nickname for app we just created
+6. add nickname for app we just created
 //we do not add those codes for firebase , we rather go to firebase documentation 
-7.click continue to console 
+7. click continue to console 
 8. now we are into the particular project 
-9.click develop -> authentication ( we will work here )
+9. click develop -> authentication ( we will work here )
 -----------------------------------------
 if we do not have a gmail logged in to our browser we have to create account for firebase website
 ------------------------------------------
@@ -49,7 +49,7 @@ Install the firebase npm package and save it to your package.json file by runnin
 To include only specific Firebase products (like Authentication and Cloud Firestore), import Firebase modules:
 
 
-//we should not use these imported codes to app.js but just to learn we import them ot app.js 
+//we should not use these imported codes to app.js but just to learn we import them to app.js 
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 3. import firebase from "firebase/app";
 
@@ -91,4 +91,19 @@ button on click:
 -------------------------------------------------------
 part 4 :  set logged in user in state, display logged in user info 
 --------------------------------------------------------
-first thing we are gonna do here is 
+we have seen how could we get signed in users info.we can show it to our website.we create a state for user info and set its value as an object consists variable like isSignedIn: false , name:'',email:'' etc
+
+then we create a object for the state if user is signed in e.g 
+    const signedInUser = {
+        isLoggedIn : true,
+        name  : displayName,
+        email : email,
+        photo : photoURL
+      }
+      setUser(signedInUser)
+and now we create a condition like if the user is signed in then we show its name e.g 
+  {
+        user.isLoggedIn&& <p>welcome, {user.name}</p>
+        
+      }
+      
