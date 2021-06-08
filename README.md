@@ -101,9 +101,13 @@ then we create a object for the state if user is signed in e.g
         photo : photoURL
       }
       setUser(signedInUser)
-and now we create a condition like if the user is signed in then we show its name e.g 
-  {
-        user.isLoggedIn&& <p>welcome, {user.name}</p>
+and now we create a condition like if the user is signed in then we show users details e.g 
+    {
+        //if isSignedIn is true
+        user.isSignedIn&& <div>
+          <p>welcome, {user.name}</p>
+          <p>your email is : {user.email}</p>
+          <img src={user.photo} alt="" />
+        </div>
         
-      }
-      
+      }    
