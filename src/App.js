@@ -58,6 +58,12 @@ function App() {
         // An error happened.
       });
   }
+  const handleBlur =(e) => {
+    console.log(e.target.name,e.target.value)
+  }
+  const handleSubmit = () => {
+    // console.log('submit button clicked')
+  }
   return (
     <div className="App">
       {/* <button onClick={handleClick}>sign in</button> */}
@@ -74,6 +80,13 @@ function App() {
         </div>
 
       }
+      <h1>Our Own Authentication</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="email" onBlur={handleBlur} placeholder="Type your email" required /> <br />
+        <input type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required/> <br />
+        {/* this submit button will submit everything inside form */}
+        <input type="submit" value="Submit" />  
+      </form>
     </div>
   );
 }
