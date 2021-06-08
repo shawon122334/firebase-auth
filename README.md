@@ -6,7 +6,7 @@ part 1 : create firebase project
 --------------------------------------
 how do we create firebase project? 
 
-1. go to firebase project 
+1. go to firebase project (in firebase website)
 2. get started
 3. create project (space not allowed for project name) 
 4. select google analytics if you need 
@@ -101,7 +101,7 @@ then we create a object for the state if user is signed in e.g
         photo : photoURL
       }
       setUser(signedInUser)
-and now we create a condition like if the user is signed in then we show users details e.g 
+and now we create a condition like if the user is signed in then we show users logged in emails details e.g 
     {
         //if isSignedIn is true
         user.isSignedIn&& <div>
@@ -110,4 +110,29 @@ and now we create a condition like if the user is signed in then we show users d
           <img src={user.photo} alt="" />
         </div>
         
-      }    
+      }
+
+-----------------------------------------------------------------
+part 5 : sign out user 
+-----------------------------------------------------------------
+first we make the button dynamic. if the user isSignedIn then it goes to handleSignIn function else it goes to handleSignOut function 
+
+then inside handleSignOut function we say 
+            const handleSignOut = () => {
+      // console.log('sign out button clicked')
+
+      firebase.auth().signOut()
+        .then(() => {
+          // Sign-out successful.
+          const signedOutUser = {
+            isSignedIn: false,
+            name: '',
+            email: '',
+            photo: ''
+          } 
+          setUser(signedOutUser)
+        }).catch((error) => {
+          // An error happened.
+          });
+          }
+-----------------------------------------------------------------
