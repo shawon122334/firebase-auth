@@ -137,8 +137,27 @@ then inside handleSignOut function we say
           }
           
 -----------------------------------------------------------------
-Simple Log In Form
+part 6: Simple Log In Form
 -----------------------------------------------------------------
-we make a form . inside form we create 2 input field for email and password. we gave them name and make them required. and onBlur (when the focused field is changed it works) we print the value
-extra line
-extra line
+we make a form .inside form we create 2 input field for email and password. we gave them name and make them required. and onBlur it goes to one function (when the focused field is changed it works) 
+-----------------------------------------------------------------
+part 7: form field validation using regEx
+----------------------------------------------------------------- 
+              const handleBlur =(e) => {
+              console.log(e.target.name,e.target.value)
+              //email validation(checking if name is email)
+              if(e.target.name === 'email'){
+              const isEmailValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
+              console.log(isEmailValid)
+            }
+              //password validation(checking if name is password)
+              if(e.target.name === 'password'){
+              const isPasswordValid = e.target.value.length > 6;
+              const passwordHasNumber = /\d{1}/.test(e.target.value)
+              console.log(isPasswordValid && passwordHasNumber)
+
+            }
+          }
+          
+          
+---------------------------------------------------------------
