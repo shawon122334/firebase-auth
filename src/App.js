@@ -14,10 +14,12 @@ function App() {
   //state for user info
   const [user, setUser] = useState({
     isSignedIn: false,
-    name :'',
-    email : '',
-    password : '',
-    photo: ''
+    name: '',
+    email: '',
+    password: '',
+    photo: '',
+    error:'',
+    success: false
   })
   //we need a firebase provider
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -59,31 +61,54 @@ function App() {
         // An error happened.
       });
   }
-  const handleBlur =(e) => {
+  const handleBlur = (e) => {
     // console.log(e.target.name,e.target.value)
     let isFormValid;
     //email validation(checking if name is email)
-    if(e.target.name === 'email'){
+    if (e.target.name === 'email') {
       isFormValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
-      
+
     }
     //password validation(checking if name is password)
-    if(e.target.name === 'password'){
+    if (e.target.name === 'password') {
       const isPasswordValid = e.target.value.length > 6;
       const passwordHasNumber = /\d{1}/.test(e.target.value)
       isFormValid = isPasswordValid && passwordHasNumber;
 
     }
-    if(e.target.name === 'name'){
-      isFormValid = e.target.value.length<20
+    if (e.target.name === 'name') {
+      isFormValid = e.target.value.length < 20
     }
-    if(isFormValid){
-      const newUser = {...user}
-      newUser[e.target.name] = e.target.value 
+    if (isFormValid) {
+      const newUser = { ...user }
+      newUser[e.target.name] = e.target.value
       setUser(newUser)
     }
   }
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    // console.log(user.email, user.password)
+    if (user.email && user.password) {
+      firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        .then((userCredential) => {
+          // Signed in 
+          var user = userCredential.user;
+          const newUserInfo = {...user}
+          newUserInfo.error = ''
+          newUserInfo.success = true
+          setUser(newUserInfo)
+          // ...
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          const newError = {...user}
+          newError.error = errorMessage;
+          newError.success = false
+          setUser(newError)
+        });
+    }
+
+    e.preventDefault();
   }
   return (
     <div className="App">
@@ -103,16 +128,19 @@ function App() {
       }
       <h1>Our Own Authentication</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" onBlur={handleBlur} placeholder="Type your name"  />
+        <input type="text" name="name" onBlur={handleBlur} placeholder="Type your name" />
         <br />
         <input type="text" name="email" onBlur={handleBlur} placeholder="Type your email" required /> <br />
-        <input type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required/> <br />
+        <input type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required /> <br />
         {/* this submit button will submit everything inside form */}
-        <input type="submit" value="Submit" />  
+        <input type="submit" value="Submit" />
       </form>
+      <p style={{color:'red'}}>{user.error}</p>
+      {user.success&& <p style={{color:'green'}}>user created successfully</p>}
+      {/*  we do not need them
       <h3>Email : {user.email}</h3>
       <h3>Password : {user.password}</h3>
-      <h3>Name : {user.name}</h3>
+      <h3>Name : {user.name}</h3> */}
     </div>
   );
 }
