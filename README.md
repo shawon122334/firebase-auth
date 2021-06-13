@@ -185,3 +185,34 @@ part 8: update state from field
               }
             }
 
+----------------------------------------------------
+part 9: create new user and handle error message
+----------------------------------------------------
+we use codes from firebase password authentication so that user can not use one email twice to create an account. 
+    //first we make user.success as false 
+    const handleSubmit = (e) => {
+    // console.log(user.email, user.password)
+    if (user.email && user.password) {
+      firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        .then((userCredential) => {
+          // Signed in 
+          var user = userCredential.user;
+          const newUserInfo = {...user}
+          newUserInfo.error = ''
+          newUserInfo.success = true
+          setUser(newUserInfo)
+          // ...
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          const newError = {...user}
+          newError.error = errorMessage;
+          newError.success = false
+          setUser(newError)
+        });
+    }
+
+error message : 
+      <p style={{color:'red'}}>{user.error}</p>
+      {user.success&& <p style={{color:'green'}}>user created successfully</p>}
