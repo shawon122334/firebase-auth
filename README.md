@@ -161,5 +161,27 @@ part 7: form field validation using regEx
           
           
 ---------------------------------------------------------------
-part 8: 
+part 8: update state from field
 ---------------------------------------------------------------
+          <input type="text" name="email" onBlur={handleBlur} placeholder="Type your email" required />
+
+          then
+
+
+
+            const handleBlur =(e) => {
+            // console.log(e.target.name,e.target.value)
+            let isFormValid;
+            //email validation(checking if name is email)
+            if(e.target.name === 'email'){
+              isFormValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
+      
+              }
+              //updating state here
+              if(isFormValid){
+                const newUser = {...user}
+                newUser[e.target.name] = e.target.value 
+                setUser(newUser)
+              }
+            }
+

@@ -14,8 +14,9 @@ function App() {
   //state for user info
   const [user, setUser] = useState({
     isSignedIn: false,
-    name: '',
-    email: '',
+    name :'',
+    email : '',
+    password : '',
     photo: ''
   })
   //we need a firebase provider
@@ -59,18 +60,27 @@ function App() {
       });
   }
   const handleBlur =(e) => {
-    console.log(e.target.name,e.target.value)
+    // console.log(e.target.name,e.target.value)
+    let isFormValid;
     //email validation(checking if name is email)
     if(e.target.name === 'email'){
-      const isEmailValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
-      console.log(isEmailValid)
+      isFormValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
+      
     }
     //password validation(checking if name is password)
     if(e.target.name === 'password'){
       const isPasswordValid = e.target.value.length > 6;
       const passwordHasNumber = /\d{1}/.test(e.target.value)
-      console.log(isPasswordValid && passwordHasNumber)
+      isFormValid = isPasswordValid && passwordHasNumber;
 
+    }
+    if(e.target.name === 'name'){
+      isFormValid = e.target.value.length<20
+    }
+    if(isFormValid){
+      const newUser = {...user}
+      newUser[e.target.name] = e.target.value 
+      setUser(newUser)
     }
   }
   const handleSubmit = () => {
@@ -93,11 +103,16 @@ function App() {
       }
       <h1>Our Own Authentication</h1>
       <form onSubmit={handleSubmit}>
+        <input type="text" name="name" onBlur={handleBlur} placeholder="Type your name"  />
+        <br />
         <input type="text" name="email" onBlur={handleBlur} placeholder="Type your email" required /> <br />
         <input type="password" name="password" onBlur={handleBlur} placeholder="Enter your password" required/> <br />
         {/* this submit button will submit everything inside form */}
         <input type="submit" value="Submit" />  
       </form>
+      <h3>Email : {user.email}</h3>
+      <h3>Password : {user.password}</h3>
+      <h3>Name : {user.name}</h3>
     </div>
   );
 }
