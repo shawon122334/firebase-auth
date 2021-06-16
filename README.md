@@ -216,3 +216,7 @@ we use codes from firebase password authentication so that user can not use one 
 error message : 
       <p style={{color:'red'}}>{user.error}</p>
       {user.success&& <p style={{color:'green'}}>user created successfully</p>}
+      
+----------------------------------------------------
+part 10: toggle sign in and sign up form 
+----------------------------------------------------
