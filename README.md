@@ -80,6 +80,7 @@ we need to set a provider (inside the component like app.js) , then,
 we create a button so if user click log in button google sign in appears 
 
 button on click: 
+```
   const handleClick = () =>{
     firebase.auth().signInWithPopup(provider)
     .then(result=>{
@@ -88,6 +89,7 @@ button on click:
 
     })
   }
+```
 -------------------------------------------------------
 part 4 :  set logged in user in state, display logged in user info 
 --------------------------------------------------------
@@ -126,13 +128,16 @@ part 5 : sign out user
 -----------------------------------------------------------------
 first we make the button dynamic. if the user isSignedIn then it goes to handleSignIn function else it goes to handleSignOut function e.g
 
-  ```{
+  ```
+  {
   user.isSignedIn ? <button onClick={handleSignOut>sign out</button> : <button onClick={handleSignIn}>sign in</button>
-  } ```
+  }
+  ```
 
-then inside handleSignOut function we say 
+then inside handleSignOut function we say , 
 
-```const handleSignOut = () =>{
+
+  ```const handleSignOut = () =>{
     // console.log('sign out button clicked')
     firebase.auth().signOut()
     .then(() => {
@@ -148,7 +153,7 @@ then inside handleSignOut function we say
     // An error happened.
     });
   }
-```          
+  ```          
 -----------------------------------------------------------------
 part 6: Simple Log In Form
 -----------------------------------------------------------------
