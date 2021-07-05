@@ -126,9 +126,9 @@ part 5 : sign out user
 -----------------------------------------------------------------
 first we make the button dynamic. if the user isSignedIn then it goes to handleSignIn function else it goes to handleSignOut function e.g
 
-{
+  `{
   user.isSignedIn ? <button onClick={handleSignOut>sign out</button> : <button onClick={handleSignIn}>sign in</button>
-}
+  }`
 
 then inside handleSignOut function we say 
 
