@@ -1,8 +1,8 @@
-#Firebase installation and how do we use it to a project
+# Firebase installation and how do we use it to a project
 ------------------------------------------------------------------
-######firebase is server less.third party created db we use them.we can use firebase for hosting too 
+###### firebase is server less.third party created db we use them.we can use firebase for hosting too 
 ----------------------------------------
-##part 1 : create firebase project
+## part 1 : create firebase project
 --------------------------------------
 how do we create firebase project? 
 
@@ -24,7 +24,7 @@ now we go to authentication as we only work for it
 
 -we now set up sign in method and template 
 -------------------------------------------
-##part 2 : firebase install and import 
+## part 2 : firebase install and import 
 ------------------------------------
 go to docs -> select web
 we use codes for installation from cdn if we use plain js 
@@ -71,7 +71,7 @@ copy the code from firebase console-> project setting -> sdk setup configuration
 
 basic setup done
 -------------------------------------------
-##part 3 : sign in with google, open google log in pop up 
+## part 3 : sign in with google, open google log in pop up 
 ---------------------------------------------
 docs step 4 skipped as we will not deploy 
 docs step 5 -> authentication
@@ -91,7 +91,7 @@ button on click:
   }
 ```
 -------------------------------------------------------
-##part 4 :  set logged in user in state, display logged in user info 
+## part 4 :  set logged in user in state, display logged in user info 
 --------------------------------------------------------
 first we need to declare a state for with multiple value the user and
   const [user, setUser] = useState({
@@ -124,7 +124,7 @@ and now we would like to show users info to UI , so we  create a condition like 
       }
 
 -----------------------------------------------------------------
-##part 5 : sign out user 
+## part 5 : sign out user 
 -----------------------------------------------------------------
 first we make the button dynamic. if the user isSignedIn then it goes to handleSignIn function else it goes to handleSignOut function e.g
 
@@ -155,12 +155,12 @@ then inside handleSignOut function we say ,
   }
   ```          
 -----------------------------------------------------------------
-##part 6: Simple Log In Form
+## part 6: Simple Log In Form
 -----------------------------------------------------------------
 we make a form .inside form we create 2 input field for email and password. we gave them name and make them required. and onBlur it goes to one function (when the focused field is changed it works)  
   
 -----------------------------------------------------------------
-##part 7: form field validation using regEx
+## part 7: form field validation using regEx
 ----------------------------------------------------------------- 
               const handleBlur =(e) => {
               console.log(e.target.name,e.target.value)
@@ -180,7 +180,7 @@ we make a form .inside form we create 2 input field for email and password. we g
           
           
 ---------------------------------------------------------------
-##part 8: update state from field
+## part 8: update state from field
 ---------------------------------------------------------------
           <input type="text" name="email" onBlur={handleBlur} placeholder="Type your email" required />
 
@@ -205,7 +205,7 @@ we make a form .inside form we create 2 input field for email and password. we g
             }
 
 ----------------------------------------------------
-##part 9: create new user and handle error message
+## part 9: create new user and handle error message
 ----------------------------------------------------
 we use codes from firebase password authentication so that user can not use one email twice to create an account. 
     //first we make user.success as false 
@@ -237,7 +237,7 @@ error message :
       {user.success&& <p style={{color:'green'}}>user created successfully</p>}
       
 ----------------------------------------------------
-##part 10: toggle sign in and sign up form 
+## part 10: toggle sign in and sign up form 
 ----------------------------------------------------
 nothing 
 nothing,
