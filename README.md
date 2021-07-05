@@ -10,13 +10,13 @@ how do we create firebase project?
 2. get started
 3. create project (space not allowed for project name) 
 4. select google analytics if you need 
-5. we select web icon as we are developing website 
+5. we select web icon as we are developing website  
 //AB testing : change some design to check users are attracted and use these more
 6. add nickname for app we just created
 //we do not add those codes for firebase , we rather go to firebase documentation 
 7. click continue to console 
 8. now we are into the particular project 
-9. click develop -> authentication ( we will work here )
+9. click ,develop -> authentication ( we will work here )
 -----------------------------------------
 if we do not have a gmail logged in to our browser we have to create account for firebase website
 ------------------------------------------
@@ -76,7 +76,7 @@ part 3 : sign in with google, open google log in pop up
 docs step 4 skipped as we will not deploy 
 docs step 5 -> authentication
 now we go to google sign in (as we are using only this)
-we need to set a provider , then, 
+we need to set a provider (inside the component like app.js) , then, 
 we create a button so if user click log in button google sign in appears 
 
 button on click: 
@@ -91,9 +91,18 @@ button on click:
 -------------------------------------------------------
 part 4 :  set logged in user in state, display logged in user info 
 --------------------------------------------------------
+first we need to declare a state for with multiple value the user and
+  const [user, setUser] = useState({
+    isSignedIn: 'false',
+    name: '',
+    email: '',
+    photo: ''
+  })
+ 
+
 we have seen how could we get signed in users info.we can show it to our website.we create a state for user info and set its value as an object consists variable like isSignedIn: false , name:'',email:'' etc
 
-then we create a object for the state if user is signed in e.g 
+then we create an object for the state if user is signed in , ( inside event handler) e.g 
     const signedInUser = {
         isLoggedIn : true,
         name  : displayName,
@@ -101,7 +110,7 @@ then we create a object for the state if user is signed in e.g
         photo : photoURL
       }
       setUser(signedInUser)
-and now we create a condition like if the user is signed in then we show users logged in emails details e.g 
+and now we would like to show users info to UI , so we  create a condition like if the user is signed in then we show users logged in emails details e.g 
     {
         //if isSignedIn is true
         user.isSignedIn&& <div>
@@ -115,31 +124,34 @@ and now we create a condition like if the user is signed in then we show users l
 -----------------------------------------------------------------
 part 5 : sign out user 
 -----------------------------------------------------------------
-first we make the button dynamic. if the user isSignedIn then it goes to handleSignIn function else it goes to handleSignOut function 
-
+first we make the button dynamic. if the user isSignedIn then it goes to handleSignIn function else it goes to handleSignOut function e.g 
+    {
+        user.isSignedIn ? <button onClick={handleSignOut}>sign out</button> : <button onClick={handleSignIn}>sign in</button>
+      }
 then inside handleSignOut function we say 
-            const handleSignOut = () => {
-      // console.log('sign out button clicked')
 
-      firebase.auth().signOut()
-        .then(() => {
-          // Sign-out successful.
-          const signedOutUser = {
-            isSignedIn: false,
-            name: '',
-            email: '',
-            photo: ''
-          } 
-          setUser(signedOutUser)
-        }).catch((error) => {
-          // An error happened.
-          });
-          }
-          
+  const handleSignOut = () =>{
+    // console.log('sign out button clicked')
+    firebase.auth().signOut()
+    .then(() => {
+    // Sign-out successful.
+    const signedOutUser = {
+      isSignedIn: false,
+      name: '',
+      email: '',
+      photo: ''
+      
+    }
+    setUser(signedOutUser)
+    }).catch((error) => {
+    // An error happened.
+     });
+  }          
 -----------------------------------------------------------------
 part 6: Simple Log In Form
 -----------------------------------------------------------------
-we make a form .inside form we create 2 input field for email and password. we gave them name and make them required. and onBlur it goes to one function (when the focused field is changed it works) 
+we make a form .inside form we create 2 input field for email and password. we gave them name and make them required. and onBlur it goes to one function (when the focused field is changed it works)  
+  
 -----------------------------------------------------------------
 part 7: form field validation using regEx
 ----------------------------------------------------------------- 
@@ -221,4 +233,4 @@ error message :
 part 10: toggle sign in and sign up form 
 ----------------------------------------------------
 nothing 
-nothing
+nothing,
