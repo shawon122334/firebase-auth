@@ -94,13 +94,14 @@ button on click:
 ## part 4 :  set logged in user in state, display logged in user info 
 --------------------------------------------------------
 first we need to declare a state for with multiple value the user and
+```
   const [user, setUser] = useState({
     isSignedIn: 'false',
     name: '',
     email: '',
     photo: ''
   })
- 
+``` 
 
 we have seen how could we get signed in users info.we can show it to our website.we create a state for user info and set its value as an object consists variable like isSignedIn: false , name:'',email:'' etc
 
@@ -157,8 +158,27 @@ then inside handleSignOut function we say ,
 -----------------------------------------------------------------
 ## part 6: Simple Log In Form
 -----------------------------------------------------------------
-we make a form .inside form we create 2 input field for email and password. we gave them name and make them required. and onBlur it goes to one function (when the focused field is changed it works)  
-  
+we make a form.inside form we create 2 input field for email and password. we gave them name,type and make them required. and onBlur it goes to one function (when the focused field is changed it works) 
+we make input type submit button. On submit it goes to empty handleSubmit function for now
+-onSubmit it goes to empty handleSubmit function
+-to get email and password field value we create handleBlur function
+  ```
+  {const handleSubmit=() =>{
+    console.log("button clicked")
+  }
+  const handleBlur=(event)=>{
+    console.log(event.target.name,event.target.value)
+  }
+  }
+  <form onSubmit={handleSubmit}>
+    <input name="email" onBlur={handleBlur} type="email" placeholder="Type your email" required>
+    <br/>
+    <input name="password" onBlur={handleBlur} type="password" placeholder="Type your password" required>
+    <br/>
+    <input type="submit" value="Submit">
+  </form>
+  ```
+
 -----------------------------------------------------------------
 ## part 7: form field validation using regEx
 ----------------------------------------------------------------- 
