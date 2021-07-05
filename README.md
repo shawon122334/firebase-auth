@@ -138,7 +138,8 @@ first we make the button dynamic. if the user isSignedIn then it goes to handleS
 then inside handleSignOut function we say , 
 
 
-  ```const handleSignOut = () =>{
+  ```sh
+    const handleSignOut = () =>{
     // console.log('sign out button clicked')
     firebase.auth().signOut()
     .then(() => {
@@ -160,9 +161,9 @@ then inside handleSignOut function we say ,
 -----------------------------------------------------------------
 we make a form.inside form we create 2 input field for email and password. we gave them name,type and make them required. and onBlur it goes to one function (when the focused field is changed it works) 
 we make input type submit button. On submit it goes to empty handleSubmit function for now
--onSubmit it goes to empty handleSubmit function
--to get email and password field value we create handleBlur function
-  ```
+- onSubmit it goes to empty handleSubmit function
+- to get email and password field value we create handleBlur function
+  ```sh
   {const handleSubmit=() =>{
     console.log("button clicked")
   }
@@ -171,7 +172,7 @@ we make input type submit button. On submit it goes to empty handleSubmit functi
   }
   }
   <form onSubmit={handleSubmit}>
-    <input name="email" onBlur={handleBlur} type="email" placeholder="Type your email" required>
+    <input nam,e="email" onBlur={handleBlur} type="email" placeholder="Type your email" required>
     <br/>
     <input name="password" onBlur={handleBlur} type="password" placeholder="Type your password" required>
     <br/>
@@ -182,22 +183,23 @@ we make input type submit button. On submit it goes to empty handleSubmit functi
 -----------------------------------------------------------------
 ## part 7: form field validation using regEx
 ----------------------------------------------------------------- 
-              const handleBlur =(e) => {
-              console.log(e.target.name,e.target.value)
-              //email validation(checking if name is email)
-              if(e.target.name === 'email'){
-              const isEmailValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
-              console.log(isEmailValid)
-            }
-              //password validation(checking if name is password)
-              if(e.target.name === 'password'){
-              const isPasswordValid = e.target.value.length > 6;
-              const passwordHasNumber = /\d{1}/.test(e.target.value)
-              console.log(isPasswordValid && passwordHasNumber)
-
-            }
-          }
-          
+now we are going to validate the form.we can do it using regEx.And test it using its value and print it.But first we make a condition to understand which input field it is.
+```sh
+const handleBlur =(e) => {
+  console.log(e.target.name,e.target.value)
+  //email validation(checking if name is email)
+  if(e.target.name === 'email'){
+    const isEmailValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
+    console.log(isEmailValid)
+  }
+  //password validation(checking if name is password)
+  if(e.target.name === 'password'){
+    const isPasswordValid = e.target.value.length > 6;
+    const passwordHasNumber = /\d{1}/.test(e.target.value)
+    console.log(isPasswordValid && passwordHasNumber)
+  }
+}
+```          
           
 ---------------------------------------------------------------
 ## part 8: update state from field
