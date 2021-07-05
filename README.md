@@ -106,15 +106,15 @@ first we need to declare a state for with multiple value the user and
 we have seen how could we get signed in users info.we can show it to our website.we create a state for user info and set its value as an object consists variable like isSignedIn: false , name:'',email:'' etc
 
 then we create an object for the state if user is signed in , ( inside event handler) e.g 
-    const signedInUser = {
+    ```const signedInUser = {
         isLoggedIn : true,
         name  : displayName,
         email : email,
         photo : photoURL
       }
-      setUser(signedInUser)
+      setUser(signedInUser)```
 and now we would like to show users info to UI , so we  create a condition like if the user is signed in then we show users logged in emails details e.g 
-    {
+    ```{
         //if isSignedIn is true
         user.isSignedIn&& <div>
           <p>welcome, {user.name}</p>
@@ -122,7 +122,7 @@ and now we would like to show users info to UI , so we  create a condition like 
           <img src={user.photo} alt="" />
         </div>
         
-      }
+      }```
 
 -----------------------------------------------------------------
 ## part 5 : sign out user 
@@ -138,7 +138,7 @@ first we make the button dynamic. if the user isSignedIn then it goes to handleS
 then inside handleSignOut function we say , 
 
 
-  ```sh
+  ```
     const handleSignOut = () =>{
     // console.log('sign out button clicked')
     firebase.auth().signOut()
@@ -163,7 +163,7 @@ we make a form.inside form we create 2 input field for email and password. we ga
 we make input type submit button. On submit it goes to empty handleSubmit function for now
 - onSubmit it goes to empty handleSubmit function
 - to get email and password field value we create handleBlur function
-  ```sh
+  ```
   {const handleSubmit=() =>{
     console.log("button clicked")
   }
@@ -184,7 +184,7 @@ we make input type submit button. On submit it goes to empty handleSubmit functi
 ## part 7: form field validation using regEx
 ----------------------------------------------------------------- 
 now we are going to validate the form.we can do it using regEx.And test it using its value and print it.But first we make a condition to understand which input field it is.
-```sh
+```
 const handleBlur =(e) => {
   console.log(e.target.name,e.target.value)
   //email validation(checking if name is email)
@@ -204,28 +204,30 @@ const handleBlur =(e) => {
 ---------------------------------------------------------------
 ## part 8: update state from field
 ---------------------------------------------------------------
-          <input type="text" name="email" onBlur={handleBlur} placeholder="Type your email" required />
+we are getting email password value , now we set these value to the user state
+our user state does not have password so we write it first.Now if we want to add an item in the array the first thing we do is copy the array and add the new item and setState 
+```const handleBlur = (e) => {
+    // console.log(e.target.name,e.target.value)
+    let isFormValid;
+    //email validation(checking if name is email)
+    if (e.target.name === 'email') {
+      isFormValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
 
-          then
+    }
+    //password validation(checking if name is password)
+    if (e.target.name === 'password') {
+      const isPasswordValid = e.target.value.length > 6;
+      const passwordHasNumber = /\d{1}/.test(e.target.value)
+      isFormValid = isPasswordValid && passwordHasNumber;
 
-
-
-            const handleBlur =(e) => {
-            // console.log(e.target.name,e.target.value)
-            let isFormValid;
-            //email validation(checking if name is email)
-            if(e.target.name === 'email'){
-              isFormValid = (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.value))
-      
-              }
-              //updating state here
-              if(isFormValid){
-                const newUser = {...user}
-                newUser[e.target.name] = e.target.value 
-                setUser(newUser)
-              }
-            }
-
+    }
+    if (isFormValid) {
+      const newUser = { ...user }
+      newUser[e.target.name] = e.target.value
+      setUser(newUser)
+    }
+  }
+```
 ----------------------------------------------------
 ## part 9: create new user and handle error message
 ----------------------------------------------------

@@ -137,10 +137,10 @@ function App() {
       </form>
       <p style={{color:'red'}}>{user.error}</p>
       {user.success&& <p style={{color:'green'}}>user created successfully</p>}
-      {/*  we do not need them
+       we do not need them
       <h3>Email : {user.email}</h3>
       <h3>Password : {user.password}</h3>
-      <h3>Name : {user.name}</h3> */}
+      <h3>Name : {user.name}</h3>
     </div>
   );
 }
