@@ -129,8 +129,7 @@ first we make the button dynamic. if the user isSignedIn then it goes to handleS
         user.isSignedIn ? <button onClick={handleSignOut}>sign out</button> : <button onClick={handleSignIn}>sign in</button>
       }
 then inside handleSignOut function we say 
-
-  const handleSignOut = () =>{
+const handleSignOut = () =>{
     // console.log('sign out button clicked')
     firebase.auth().signOut()
     .then(() => {
